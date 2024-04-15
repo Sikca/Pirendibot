@@ -47,6 +47,8 @@ class 가입_modal(discord.ui.Modal, title="계정 확인"):
                 date2 = datetime.now()
                 dbase.execute(f"INSERT INTO {pp} (DATE,RATING) VALUES(?,?)",(date2.strftime("%Y-%m-%d %H:%M:%S"),800))
                 dbase.execute(f"SELECT * , rowid AS rowid FROM {pp};")
+                dbase.execute(f"CREATE TABLE IF NOT EXISTS public_settings(NAME TEXT NOT NULL, PUBLIC INT NOT NULL)")
+                dbase.execute(f"INSERT INTO public_settings (NAME,PUBLIC) VALUES(?,?)",(pp,1))
                 dbase.commit()
                 await interaction.response.send_message(f"{interaction.user.mention} 인증이 완료되었습니다.")
             else:

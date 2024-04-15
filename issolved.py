@@ -14,13 +14,13 @@ async def issolved(name : str, problem : int):
 
 async def finish_confirm():
     return 1
-async def finish(channel : discord.Interaction.channel):
-    button_variable.over = 1
+async def finish(channel : discord.Interaction.channel, user_name : str):
+    button_variable.over[user_name] = 1
     await channel.send(f"랜디가 종료되었습니다!")
-    if button_variable.problem_len == button_variable.solved_cnt:
-        await channel.send(f"{button_variable.solved_cnt}개 문제를 다 풀으셨군요! 축하합니다!")
+    if button_variable.problem_len[user_name] == button_variable.solved_cnt[user_name]:
+        await channel.send(f"{button_variable.solved_cnt[user_name]}개 문제를 다 풀으셨군요! 축하합니다!")
         # await channel.send(f"새로운 레이팅을 반영 중 입니다...")
     else:
-        await channel.send(f"{button_variable.solved_cnt}개 문제를 풀으셨군요! 축하합니다!")
+        await channel.send(f"{button_variable.solved_cnt[user_name]}개 문제를 풀으셨군요! 축하합니다!")
     
     return await finish_confirm()
